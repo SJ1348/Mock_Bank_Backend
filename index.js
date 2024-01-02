@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json()); // Body parsing middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes
 app.get("/", (req, res) => {
