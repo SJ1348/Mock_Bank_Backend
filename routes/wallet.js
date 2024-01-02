@@ -1,24 +1,18 @@
 import { Router } from "express";
 import { Account } from "../db/index.js";
+import { userInputvalidation } from "../middleware/userInputValidation.js";
 
 const router = Router();
 
 // Wallet Routes
-router.post("/getBalance", async (req, res) => {
-  const pin = req.body.pin;
+router.post("/getBalance", userInputvalidation, async (req, res) => {
   const accountNumber = req.body.accountNumber;
-
-  let account = await Account.find({ accountNumber: accountNumber, pin: pin });
-
-  if (account) {
-    await Account.findOne({ pin: pin }).then((acc) => {
-      res.json({ balance: acc.balance });
-    });
-  }
+  let account = await Account.findOne({ accountNumber: accountNumber });
+  res.json({
+    balance: account.balance,
+  });
 });
 
-router.post("/updateBalance", async (req, res) => {
-  const pin = req.body.pin;
-});
+router.post("/updateBalance", userInputvalidation, async (req, res) => {});
 
 export { router };

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { generateRandomNumber } from "../utils/generateRandomNumber.js";
+import { Account } from "../db/index.js";
 
 const router = Router();
 
@@ -86,8 +87,15 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const pin = req.body.pin;
+  const pin = parseInt(req.body.pin);
   const accountNumber = generateRandomNumber();
+
+  Account.create({
+    accountNumber: accountNumber,
+    pin: pin,
+    balance: 100000,
+  });
+
   res.json({ accountNumber, pin });
 });
 

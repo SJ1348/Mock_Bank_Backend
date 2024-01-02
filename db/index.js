@@ -1,9 +1,18 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Connect to MongoDB
-mongoose.connect(
-  "mongodb+srv://manjiripathak01:DbowYNgfWacekh9Y@mockbank.hyvpzb6.mongodb.net/Accounts"
-);
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 
 //Define Schemas
 const AccountSchema = new mongoose.Schema({

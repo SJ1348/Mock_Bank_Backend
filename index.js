@@ -4,6 +4,10 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { router as userRouter } from "./routes/user.js";
 import { router as walletRouter } from "./routes/wallet.js";
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Initializing Express
 const app = express();
