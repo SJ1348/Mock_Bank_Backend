@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { generateRandomNumber } from "../utils/generateRandomNumber.js";
-import { Account } from "../db/index.js";
+import { prisma } from "../prisma/index.js";
 
 const router = Router();
 
@@ -89,14 +89,17 @@ router.get("/signup", (req, res) => {
 router.post("/signup", async (req, res) => {
   const pin = parseInt(req.body.pin);
   const accountNumber = generateRandomNumber();
-
-  Account.create({
+  const accountData = {
     accountNumber: accountNumber,
     pin: pin,
     balance: 100000,
+  };
+
+  await prisma.accounts.create({
+    data: accountData,
   });
 
-  res.json({ accountNumber, pin });
+  res.status(200).json({ accountData });
 });
 
 export { router };
