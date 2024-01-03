@@ -11,7 +11,10 @@ export const accountNumberSchema = z
     message: "Account Number must be a 10 digit interger",
   });
 
-export const amountSchema = z.number().min(0);
+// Did not use .min(0) so that I could throw custom error message.
+export const amountSchema = z.number().refine((data) => data >= 0, {
+  message: "Amount must be greater than or equal to 0",
+});
 
 export const operationSchema = z.string().refine(
   (value) => {
