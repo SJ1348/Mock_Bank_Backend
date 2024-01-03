@@ -11,6 +11,6 @@ model accounts {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   accountNumber Int @unique
   balance       Int
-  pin           Int
+  pin           String
 
 }

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { generateRandomNumber } from "../utils/generateRandomNumber.js";
 import { prisma } from "../prisma/index.js";
+import { pinSchema } from "../zod/types.js";
 
 const router = Router();
 
@@ -87,19 +88,25 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const pin = parseInt(req.body.pin);
+  const pin = req.body.pin;
   const accountNumber = generateRandomNumber();
-  const accountData = {
-    accountNumber: accountNumber,
-    pin: pin,
-    balance: 100000,
-  };
+  try {
+    pinSchema.parse(pin);
 
-  await prisma.accounts.create({
-    data: accountData,
-  });
+    const accountData = {
+      accountNumber: accountNumber,
+      pin: pin,
+      balance: 100000,
+    };
 
-  res.status(200).json({ accountData });
+    await prisma.accounts.create({
+      data: accountData,
+    });
+
+    res.status(200).json({ accountData });
+  } catch (error) {
+    res.status(401).json({ message: error.issues[0].message });
+  }
 });
 
 export { router };
