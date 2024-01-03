@@ -5,7 +5,7 @@ import { userInputvalidation } from "../middleware/userInputValidation.js";
 const router = Router();
 
 // Wallet Routes
-router.post("/getBalance", userInputvalidation, async (req, res) => {
+router.get("/getBalance", userInputvalidation, async (req, res) => {
   const accountNumber = parseInt(req.body.accountNumber);
   let account = await prisma.accounts.findUnique({
     where: {
