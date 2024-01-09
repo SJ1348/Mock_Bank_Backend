@@ -73,4 +73,10 @@ router.put("/updateBalance", userInputvalidation, async (req, res) => {
   }
 });
 
+router.get("/checkAccount", userInputvalidation, async (req, res) => {
+  res.status(200).json({
+    message: "Bank account and pin matches",
+  });
+});
+
 export { router };
