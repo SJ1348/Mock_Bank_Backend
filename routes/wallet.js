@@ -18,7 +18,7 @@ router.get("/getBalance", userInputvalidation, async (req, res) => {
   });
 });
 
-router.put("/updateBalance", userInputvalidation, async (req, res) => {
+router.post("/updateBalance", userInputvalidation, async (req, res) => {
   const accountNumber = parseInt(req.body.accountNumber);
   const amount = parseInt(req.body.amount);
   const operation = req.body.operation;
