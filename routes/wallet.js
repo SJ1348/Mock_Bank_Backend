@@ -49,7 +49,7 @@ router.post("/updateBalance", userInputvalidation, async (req, res) => {
       });
 
       if (account.balance < amount) {
-        res.status(402).json({
+        res.status(200).json({
           message: "Insufficient funds",
         });
       } else {
@@ -69,7 +69,7 @@ router.post("/updateBalance", userInputvalidation, async (req, res) => {
       }
     }
   } catch (error) {
-    res.status(401).json({ message: error.issues[0].message });
+    res.status(200).json({ message: error.issues[0].message });
   }
 });
 
