@@ -15,6 +15,8 @@ URL : "https://mockbank.onrender.com/user/signup"
 * RESPONSE : { accountNumber: Int, pin: string, balance: Int }
 * ERROR : { message: "Zod Validations"}
 
+# Wallet APIs
+
 URL : "https://mockbank.onrender.com/wallet/checkAccount"
 * METHOD : POST
 * BODY : { accountNumber: Int, pin: string }
