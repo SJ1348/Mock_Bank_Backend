@@ -19,13 +19,13 @@ URL : "https://mockbank.onrender.com/user/signup"
 
 URL : "https://mockbank.onrender.com/wallet/checkAccount"
 * METHOD : POST
-* BODY : { accountNumber: Int, pin: string }
+* BODY : { "accountNumber": Int, "pin": string }
 * RESPONSE : { message: "Bank account and pin matches" }
 * ERROR : { message: "Invalid Credentials" / "Zod Validations" }
 
 URL : "https://mockbank.onrender.com/wallet/getBalance"
 * METHOD : GET
-* BODY : { accountNumber: Int, pin: string }
+* BODY : { "accountNumber": Int, "pin": string }
 * RESPONSE : { balance: Int }
 * ERROR : { message: "Invalid Credentials" / "Zod Validations" }
 
