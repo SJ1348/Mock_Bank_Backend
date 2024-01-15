@@ -8,13 +8,14 @@ const router = Router();
 // Wallet Routes
 router.get("/getBalance", userInputvalidation, async (req, res) => {
   const accountNumber = parseInt(req.body.accountNumber);
+  const name = req.body.name;
   let account = await prisma.accounts.findUnique({
     where: {
       accountNumber: accountNumber,
     },
   });
   res.status(200).json({
-    balance: account.balance,
+    balance: account?.balance,
   });
 });
 
@@ -48,6 +49,10 @@ router.post("/updateBalance", userInputvalidation, async (req, res) => {
         },
       });
 
+      if (!account) {
+        throw Error;
+      }
+
       if (account.balance < amount) {
         res.status(401).json({
           message: "Insufficient funds",
@@ -68,7 +73,7 @@ router.post("/updateBalance", userInputvalidation, async (req, res) => {
         });
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     res.status(401).json({ message: error.issues[0].message });
   }
 });

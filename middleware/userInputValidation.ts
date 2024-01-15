@@ -1,7 +1,12 @@
 import { prisma } from "../prisma/index.js";
 import { accountNumberSchema, pinSchema } from "../zod/types.js";
+import { Request, Response, NextFunction } from "express";
 
-async function userInputvalidation(req, res, next) {
+async function userInputvalidation(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const accountNumber = parseInt(req.body.accountNumber);
   const pin = req.body.pin;
   try {
@@ -22,7 +27,7 @@ async function userInputvalidation(req, res, next) {
         message: "Invalid Credentials",
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     res.status(401).json({ message: error.issues[0].message });
   }
 }

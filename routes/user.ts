@@ -104,7 +104,7 @@ router.post("/signup", async (req, res) => {
     });
 
     res.status(200).json({ accountData });
-  } catch (error) {
+  } catch (error: any) {
     res.status(401).json({ message: error.issues[0].message });
   }
 });
